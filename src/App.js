@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-import React from 'react';
+import "./App.css";
+import React, { useState, useRef } from "react";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(0);
+
+  console.log("렌더링...");
+
+  const increaseCountState = () => {
+    setCount(count + 1);
+  };
+
+  const increaseCountRef = () => {
+    countRef.current = countRef.current + 1;
+    console.log("Ref:", countRef.current);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>State: {count}</p>
+      <p>Ref: {countRef.current}</p>
+      <button onClick={increaseCountState}>State 올려</button>
+      <button onClick={increaseCountRef}>Ref 올려</button>
     </div>
   );
 }
